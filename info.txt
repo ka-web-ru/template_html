@@ -1,0 +1,118 @@
+источник:
+https://www.youtube.com/watch?v=stFOy0Noahg&t=2237s
+
+==========================================================================================================
+УСТАНОВКА
+==========================================================================================================
+установить ноду:
+https://nodejs.org/en/
+
+для win10
+проверить права перед установкой Gulp
+в терминале:
+C:\Windows\System32> Set-ExecutionPolicy RemoteSigned
+если ошибка, то запустить терминал с правами администратора и повторить вызов 
+
+установить Gulp глобально 
+C:\Windows\System32> npm install --global gulp-cli
+
+инициализировать npm в папке проекта (создастся файл проекта package.json со всеми установленными пакетами):
+F:\OpenServer\OpenServer\domains\template-html.loc\> npm init
+
+установить Gulp локально в папку проекта:
+F:\OpenServer\OpenServer\domains\template-html.loc\> npm install gulp --save-dev
+
+создать в папке проекта конфигурационный файл для Gulp:
+gulpfile.js
+
+создать папку для исходников:
+#src (хэштег в названии папки нужен, чтобы она всегда отображалась первой в проводнике, т.е. в начале спсика папок)
+
+для проверки работы Gulp вставить в gulpfile.js:
+function defaultTask(cb) {
+  // place code for your default task here
+  cb();
+}
+exports.default = defaultTask
+(взято с оффсайта gulp https://gulpjs.com/docs/en/getting-started/quick-start)
+теперь в терминале VSCode запустить Gulp:
+F:\OpenServer\OpenServer\domains\template-html.loc\> gulp
+
+если ошибки,то сделать очистку всех установленных пакетов:
+F:\OpenServer\OpenServer\domains\template-html.loc\> npm cache clean --force
+переустановить npm (переустановится глобально, флаг -g):
+F:\OpenServer\OpenServer\domains\template-html.loc\> npm i npm -g 
+повторить установку Gulp глобально и в папку проекта, повторить проверку
+
+
+===================================================================================================================
+ЗАПУСК
+===================================================================================================================
+запустить Gulp выполнить в терминале:
+F:\OpenServer\OpenServer\domains\template-html.loc\> gulp
+остановить:
+нажать Ctrl+C
+
+===================================================================================================================
+В НАЧАЛЕ ПРОЕКТА
+===================================================================================================================
+скопировать с git в папку проекта папку #src/ и файлы package.json и gulpfile.js
+в терминале перейти в папку проекта и выполнить:
+F:\OpenServer\OpenServer\domains\template-html.loc\> npm i
+(будет установлен gulp и все плагины)
+
+при необходимости сконвертировать шрифты из otf в ttf (а затем уже из ttf в woff и woff2 командой ниже)
+F:\OpenServer\OpenServer\domains\template-html.loc\> gulp otf2ttf
+
+сконвертировать шрифты из ttf в woff и woff2
+F:\OpenServer\OpenServer\domains\template-html.loc\> gulp convertFont
+
+оптимизировать картинки (сжать jpg, сконвертировать в webp) 
+F:\OpenServer\OpenServer\domains\template-html.loc\> gulp optimizeImg
+
+обработать scss, js и html
+F:\OpenServer\OpenServer\domains\template-html.loc\> gulp
+происходит очистка папок dist/css/, dist/js/ и удаляются файлы dist/*.html
+происходит отслеживание изменений в папках #src/img/, #src/fonts/, #src/css/, #src/js/ и в #src/*.html
+html - все файлы _*.html будут собраны в один, будут подключены картинки webp для поддерживающих этот формат браузеров,
+полученный html будет скопирован в папку dist/
+scss - все файлы scss будут собраны в один и преобразованы в css, медиа запросы будут собраны и помещены в конец файла,
+будут добавлены вендорные префиксы, будут подключены webp картинки для поддерживающих их браузеров, файл будет минифицирован,
+несжатый и минифицированный css будут скопированы в папку dist/css/
+js - все файлы js будут собраны в один, файл будет минифицирован, несжатый и минифицированный файл будут скопированы в папку
+dist/js/
+страница браузера будет обновлена
+
+обработку шрифтов и картинок вынес в отдельные задачи, т.к. обработка занимает много времени (до нескольких минут), 
+ 
+
+===================================================================================================================
+Open Server  и PHP
+===================================================================================================================
+чтобы плагин browser-sync работал с OpenServer нужно в настроках OpenServer вкладка "домены"
+выбрать "Ручное + автопоиск" и задать соответсвие имени домена и папки в которой опен сервер будет искать файлы сайта, например:
+"Имя домена":templates.loc  "Папка домена": \templates.loc\dist  
+затем в файле gulpfile.js в функции browserSync прописать proxy: "templates.loc"
+и не забыть указать отслеживание php файлов в объекте path в секции watch:{html: source_folder + "/**/*.{html,php}"} 
+
+
+===================================================================================================================
+ПЛАГИНЫ
+===================================================================================================================
+плагины сборки:
+npm i browser-sync --save-dev
+npm i gulp-file-include --save-dev
+npm i del --save-dev
+npm i gulp-sass --save-dev
+npm i gulp-autoprefixer --save-dev
+npm i gulp-group-css-media-queries --save-dev
+npm i gulp-clean-css --save-dev
+npm i gulp-rename --save-dev
+npm i gulp-uglify-es --save-dev
+npm i gulp-imagemin --save-dev
+npm i gulp-webp --save-dev
+npm i gulp-webp-html --save-dev
+npm i gulp-webp-css --save-dev
+npm i gulp-svg-sprite --save-dev
+npm i gulp-ttf2woff gulp-ttf2woff2 --save-dev
+npm i gulp-fonter --save-dev
