@@ -10,7 +10,26 @@
 @import 'fonts';
 @import 'clean';
 
+$font1: Roboto-Regular; // первый шрифт для сайта
+
+body {
+    font-family: $font1, sans-serif;
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    overflow: hidden;
+}
+.content {
+    flex: 1 1 auto;
+}
 section {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.main {
     display: flex;
     @media (max-width: 767px) {
         font-size: 30px;
@@ -21,10 +40,6 @@ p {
     @media (max-width: 767px) {
         font-size: 20px;
     }
-}
-.first {
-    font-family: Roboto-Thin;
-    font-size: 30px;
 }
 .img {
     display: block;

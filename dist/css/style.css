@@ -112,7 +112,34 @@ h6 {
 
 /*--------------------*/
 
+body {
+  font-family: Roboto-Regular, sans-serif;
+}
+
+.wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.content {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
 section {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -120,11 +147,6 @@ section {
 
 p {
   color: red;
-}
-
-.first {
-  font-family: Roboto-Thin;
-  font-size: 30px;
 }
 
 .img {
@@ -135,7 +157,7 @@ p {
 }
 
 @media (max-width: 767px) {
-  section {
+  .main {
     font-size: 30px;
   }
 
