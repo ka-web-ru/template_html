@@ -112,6 +112,11 @@ h6 {
 
 /*--------------------*/
 
+.list-one {
+  list-style: none;
+  padding-left: 15px;
+}
+
 body {
   font-family: Roboto-Regular, sans-serif;
 }
@@ -154,6 +159,19 @@ p {
   width: 100%;
   height: 300px;
   background: url("../img/covid.jpg") 0 0 no-repeat;
+}
+
+.list-one {
+  font-size: 14px;
+}
+
+.list-one .item {
+  display: inline-block;
+  color: green;
+}
+
+.list-one .item:hover {
+  border-bottom: 1px dashed red;
 }
 
 @media (max-width: 767px) {

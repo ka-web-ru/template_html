@@ -7,13 +7,19 @@
         //font-style: #{$style};
     }
 }
-@import 'fonts';
-@import 'clean';
+@import 'fonts'; // подключение шрифтов
+@import 'clean'; //подключение обнуляющих стилей
 
-$font1: Roboto-Regular; // первый шрифт для сайта
+$font1: Roboto-Regular; // переменная с первым шрифтом для сайта
+
+// шаблон
+%tpl-list {
+    list-style: none;
+    padding-left: 15px;
+}
 
 body {
-    font-family: $font1, sans-serif;
+    font-family: $font1, sans-serif; //шрифт задан переменной $font1
 }
 .wrapper {
     display: flex;
@@ -46,4 +52,17 @@ p {
     width: 100%;
     height: 300px;
     background: url('../img/covid.jpg') 0 0 no-repeat;
+}
+
+.list-one {
+    font-size: 14px;
+    .item {
+        display: inline-block;
+        color: green;
+        // & - заменится названием родительского класса, т.е. в css будет .item:hover{...}
+        &:hover {
+            border-bottom: 1px dashed red;
+        }
+    }
+    @extend %tpl-list; //применение шаблона
 }
