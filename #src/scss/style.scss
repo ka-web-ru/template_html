@@ -58,11 +58,21 @@ p {
     font-size: 14px;
     .item {
         display: inline-block;
+        position: relative;
         color: green;
         // & - заменится названием родительского класса, т.е. в css будет .item:hover{...}
         &:hover {
-            border-bottom: 1px dashed red;
+            cursor: pointer;
         }
+        &:hover:after {
+            content: '';
+            position: absolute;
+            left: 15px;
+            bottom: 0;
+            border-bottom: 1px dashed red;
+            width: calc(100% - 15px);
+            height: 1px;
+        }
+        @extend %tpl-list; //применение шаблона
     }
-    @extend %tpl-list; //применение шаблона
 }

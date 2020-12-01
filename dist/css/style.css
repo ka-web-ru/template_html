@@ -112,7 +112,7 @@ h6 {
 
 /*--------------------*/
 
-.list-one {
+.list-one .item {
   list-style: none;
   padding-left: 15px;
 }
@@ -167,11 +167,22 @@ p {
 
 .list-one .item {
   display: inline-block;
+  position: relative;
   color: green;
 }
 
 .list-one .item:hover {
+  cursor: pointer;
+}
+
+.list-one .item:hover:after {
+  content: '';
+  position: absolute;
+  left: 15px;
+  bottom: 0;
   border-bottom: 1px dashed red;
+  width: calc(100% - 15px);
+  height: 1px;
 }
 
 @media (max-width: 767px) {
